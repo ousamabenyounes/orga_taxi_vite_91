@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Taxi Vite 91 - Votre taxi conventionné en Essonne (91)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --p:#3b5bdb; /* Primary blue */
+    --a:#4dabf7; /* Accent blue */
+    --bg:#f0f4ff; /* Light background */
+    --nav:#1a1f4e; /* Dark navigation background */
+    --tx:#1a1a2e; /* Dark text */
+    --mu:#6c757d; /* Muted text */
+    --cb:#ffffff; /* Card background */
+    --logo-bg:#1a1a2e; /* Logo specific background (dark) */
+    --logo-accent:#c9a84c; /* Logo specific accent (gold) */
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter', 'Helvetica Neue', Arial, sans-serif;background:var(--bg);color:var(--tx);line-height:1.6;}
+
+  /* Base elements */
+  a{color:var(--p);text-decoration:none;transition:color .15s;}
+  a:hover{color:var(--a);}
+  .container{max-width:1200px;margin:0 auto;padding:0 20px;}
+
+  /* ── NAV */
+  nav{
+    position:sticky;top:0;z-index:100;background:var(--nav);
+    padding:0 20px;display:flex;align-items:center;justify-content:space-between;
+    height:64px;box-shadow:0 2px 20px rgba(0,0,0,.15);
+  }
+  .logo{font-family:'Inter', 'Helvetica Neue', Arial, sans-serif;font-size:20px;font-weight:800;color:#fff;letter-spacing:-.03em;text-decoration:none;}
+  .logo svg{display:block;} /* Ensure SVG is block level */
+  .nav-links{display:none;flex-grow:1;justify-content:center;gap:28px;}
+  .nav-links a{color:rgba(255,255,255,.75);font-size:14px;font-weight:500;text-decoration:none;transition:color .15s;}
+  .nav-links a:hover{color:#fff;}
+  .nav-tel{
+    background:var(--p);color:#fff;padding:9px 20px;border-radius:8px;
+    font-size:14px;font-weight:700;text-decoration:none;letter-spacing:.01em;
+    display:none; /* Hidden on mobile, shown on larger screens */
+  }
+  .hamburger-menu{
+    display:block; /* Show on mobile */
+    background:none;border:none;cursor:pointer;
+    padding:8px;position:relative;z-index:101;
+  }
+  .hamburger-menu span{
+    display:block;width:24px;height:2px;background:#fff;
+    margin-bottom:5px;transition:all .2s ease-in-out;
+  }
+  .hamburger-menu span:last-child{margin-bottom:0;}
+  .hamburger-menu.active span:nth-child(1){transform:rotate(45deg) translate(5px, 5px);}
+  .hamburger-menu.active span:nth-child(2){opacity:0;}
+  .hamburger-menu.active span:nth-child(3){transform:rotate(-45deg) translate(5px, -5px);}
+
+  /* Mobile nav overlay */
+  .nav-overlay{
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(26,31,78,.95); /* var(--nav) with transparency */
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    opacity:0;visibility:hidden;transition:opacity .3s ease, visibility .3s ease;
+    z-index:99;
+  }
+  .nav-overlay.active{opacity:1;visibility:visible;}
+  .nav-overlay .nav-links{display:flex;flex-direction:column;gap:30px;}
+  .nav-overlay .nav-links a{font-size:20px;font-weight:600;}
+  .nav-overlay .nav-tel{display:block;margin-top:40px;padding:12px 28px;font-size:16px;}
+
+
+  /* ── HERO */
+  .hero{
+    background:#1a1f4e url('https://source.unsplash.com/random/1600x900/?taxi,paris,road') no-repeat center center/cover;
+    color:#ffffff;min-height:92vh;display:flex;align-items:center;padding:60px 20px;
+    position:relative;overflow:hidden;
+  }
+  .hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,.55) 0%,transparent 60%);}
+  .hero-inner{max-width:640px;position:relative;z-index:1;}
+  .hero-badge{
+    display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.2);color:#ffffff;padding:6px 16px;
+    border-radius:20px;font-size:13px;font-weight:600;margin-bottom:24px;
+    backdrop-filter:blur(6px);
+  }
+  .hero h1{font-family:'Inter', 'Helvetica Neue', Arial, sans-serif;font-size:clamp(32px,5vw,58px);font-weight:900;line-height:1.1;margin-bottom:20px;letter-spacing:-.02em;}
+  .hero p{font-size:17px;opacity:.8;margin-bottom:36px;line-height:1.6;max-width:500px;}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn-p{
+    background:var(--p);color:#fff;padding:14px 32px;border-radius:10px;
+    font-size:15px;font-weight:700;text-decoration:none;display:inline-block;
+    box-shadow:0 4px 24px rgba(59,91,219,.4); /* Using var(--p) with transparency */
+    transition:transform .2s ease-out, box-shadow .2s ease-out;
+  }
+  .btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(59,91,219,.6);}
+  .btn-s{
+    background:rgba(255,255,255,.12);color:#ffffff;padding:14px 28px;
+    border-radius:10px;font-size:15px;font-weight:600;text-decoration:none;
+    display:inline-block;border:1.5px solid rgba(255,255,255,.25);backdrop-filter:blur(6px);
+    transition:background .2s ease-out, border-color .2s ease-out;
+  }
+  .btn-s:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.4);}
+
+  /* ── SECTIONS communes */
+  .section{padding:80px 20px;}
+  .section-head{text-align:center;margin-bottom:52px;}
+  .section-head h2{font-family:'Inter', 'Helvetica Neue', Arial, sans-serif;font-size:clamp(24px,3.5vw,38px);font-weight:800;letter-spacing:-.02em;margin-bottom:10px;}
+  .section-head p{font-size:16px;color:var(--mu);max-width:700px;margin:0 auto;}
+
+  /* ── SERVICES */
+  .services{background:var(--bg);}
+  .cards-grid{display:grid;grid-template-columns:1fr;gap:24px;max-width:840px;margin:0 auto;}
+  .card{background:var(--cb);border-radius:20px;padding:28px 24px;border:1.5px solid rgba(0,0,0,.06);text-align:center;box-shadow:0 4px 12px rgba(0,0,0,.04);transition:transform .2s ease-out, box-shadow .2s ease-out;}
+  .card:hover{transform:translateY(-5px);box-shadow:0 8px 20px rgba(0,0,0,.08);}
+  .card-icon{color:var(--p);font-size:36px;margin-bottom:14px;display:inline-block;line-height:1;}
+  .card h3{font-size:18px;font-weight:700;margin-bottom:8px;color:var(--tx);}
+  .card p{font-size:14px;color:var(--mu);line-height:1.65;}
+
+  /* ── WHY US (Inspiration from ABOUT section in reference) */
+  .why-us{background:var(--cb);}
+  .why-us-inner{max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:40px;align-items:center;}
+  .why-us-content{text-align:center;}
+  .why-us-content h2{font-family:'Inter', 'Helvetica Neue', Arial, sans-serif;font-size:clamp(22px,3vw,34px);font-weight:800;margin-bottom:16px;letter-spacing:-.02em;}
+  .why-us-content p{font-size:15px;color:var(--mu);line-height:1.75;max-width:700px;margin:0 auto;}
+  .features-grid{display:grid;grid-template-columns:1fr;gap:30px;margin-top:40px;}
+  .feature-item{display:flex;align-items:flex-start;gap:16px;text-align:left;}
+  .feature-icon{color:var(--p);font-size:28px;flex-shrink:0;}
+  .feature-item h3{font-size:18px;font-weight:700;margin-bottom:6px;}
+  .feature-item p{font-size:14px;color:var(--mu);line-height:1.6;}
+
+  /* ── CONTACT */
+  .contact{background:var(--bg);}
+  .contact-form-wrapper{max-width:700px;margin:0 auto;background:var(--cb);padding:40px;border-radius:20px;box-shadow:0 8px 30px rgba(0,0,0,.08);border:1.5px solid rgba(0,0,0,.06);}
+  .contact-form label{display:block;font-size:14px;font-weight:600;margin-bottom:8px;color:var(--tx);}
+  .contact-form input[type="text"],
+  .contact-form input[type="email"],
+  .contact-form input[type="tel"],
+  .contact-form textarea{
+    width:100%;padding:12px 16px;border:1px solid #dcdcdc;border-radius:8px;
+    font-family:'Inter', sans-serif;font-size:15px;color:var(--tx);
+    background:#fdfdff;margin-bottom:20px;transition:border-color .15s, box-shadow .15s;
+  }
+  .contact-form input[type="text"]:focus,
+  .contact-form input[type="email"]:focus,
+  .contact-form input[type="tel"]:focus,
+  .contact-form textarea:focus{border-color:var(--p);outline:none;box-shadow:0 0 0 3px rgba(59,91,219,.2);}
+  .contact-form textarea{min-height:120px;resize:vertical;}
+  .contact-form button{
+    display:block;width:100%;padding:14px 24px;background:var(--p);
+    color:#fff;border:none;border-radius:10px;font-size:16px;
+    font-weight:700;cursor:pointer;transition:background .2s ease-out, transform .2s ease-out;
+  }
+  .contact-form button:hover{background:var(--a);transform:translateY(-1px);}
+
+  /* ── FOOTER */
+  footer{background:var(--nav);color:rgba(255,255,255,.7);padding:40px 20px;text-align:center;font-size:14px;}
+  footer .logo{margin-bottom:15px;display:inline-block;}
+  footer p{margin-top:10px;line-height:1.5;}
+  footer .footer-links{margin-top:20px;}
+  footer .footer-links a{color:rgba(255,255,255,.6);font-size:14px;margin:0 10px;display:inline-block;}
+  footer .footer-links a:hover{color:#fff;}
+
+  /* ── RESPONSIVENESS (Media Queries) */
+  @media (min-width: 768px) {
+    nav{padding:0 40px;}
+    .hamburger-menu{display:none;} /* Hide hamburger on larger screens */
+    .nav-links{display:flex;flex-grow:0;margin-left:auto;margin-right:28px;} /* Show nav links */
+    .nav-tel{display:block;} /* Show phone number */
+    .nav-overlay{display:none !important;} /* Hide overlay entirely */
+
+    .section{padding:100px 40px;}
+    .cards-grid{grid-template-columns:repeat(2,1fr);gap:30px;}
+    .card{text-align:left;}
+    .card-icon{margin-left:0;}
+
+    .why-us-inner{flex-direction:row;text-align:left;gap:60px;}
+    .why-us-content{text-align:left;flex:1;}
+    .why-us-content h2{margin-top:0;}
+    .features-grid{grid-template-columns:repeat(2,1fr);margin-top:0;flex:1;}
+    .feature-item{flex-direction:row;align-items:flex-start;}
+
+    .contact-form-wrapper{padding:50px;}
+    .contact-form .form-row{display:flex;gap:20px;}
+    .contact-form .form-row > div{flex:1;}
+  }
+
+  @media (min-width: 1024px) {
+    .nav-links{gap:32px;}
+    .hero{min-height:700px;}
+    .hero h1{font-size:64px;}
+    .hero p{font-size:20px;}
+    .section{padding:120px 40px;}
+    .section-head h2{font-size:44px;}
+    .cards-grid{grid-template-columns:repeat(3,1fr);}
+    .why-us-inner{gap:80px;}
+    .features-grid{gap:40px;}
+  }
+</style>
+</head>
+<body>
+
+  <nav>
+    <a href="#accueil" class="logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" width="120" height="48">
+        <rect width="200" height="80" rx="12" fill="var(--logo-bg)"/>
+        <rect x="10" y="62" width="30" height="4" rx="2" fill="var(--logo-accent)"/>
+        <text x="100" y="48" font-family="Georgia, serif" font-size="18"
+          font-weight="700" font-style="normal"
+          letter-spacing="4" fill="var(--logo-accent)" text-anchor="middle"
+          dominant-baseline="middle">TAXI VITE 91</text>
+      </svg>
+    </a>
+    <div class="nav-links">
+      <a href="#accueil">Accueil</a>
+      <a href="#services">Services</a>
+      <a href="#pourquoi-nous">Pourquoi nous</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="tel:+33123456789" class="nav-tel">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:8px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72L9.73 8a2 2 0 0 1-.55 2L5.41 14.1a2 2 0 0 0-.45 2.11L9 20a22.35 22.35 0 0 0 4.9 0l3.77-3.79a2 2 0 0 0 2.11-.45l3.4-3.77a2 2 0 0 1 1.72-2h3a2 2 0 0 1 2 2z"></path></svg>
+      01 23 45 67 89
+    </a>
+    <button class="hamburger-menu" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="nav-overlay">
+    <div class="nav-links">
+      <a href="#accueil">Accueil</a>
+      <a href="#services">Services</a>
+      <a href="#pourquoi-nous">Pourquoi nous</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="tel:+33123456789" class="nav-tel">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:10px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72L9.73 8a2 2 0 0 1-.55 2L5.41 14.1a2 2 0 0 0-.45 2.11L9 20a22.35 22.35 0 0 0 4.9 0l3.77-3.79a2 2 0 0 0 2.11-.45l3.4-3.77a2 2 0 0 1 1.72-2h3a2 2 0 0 1 2 2z"></path></svg>
+      Appelez-nous : 01 23 45 67 89
+    </a>
+  </div>
+
+
+  <header id="accueil" class="hero">
+    <div class="container hero-inner">
+      <span class="hero-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16v-3a3 3 0 0 1 3-3h12"/><path d="m15 14 5 5 5-5"/></svg>
+        TAXI PROFESSIONNEL EN ESSONNE (91)
+      </span>
+      <h1>Votre partenaire de confiance pour tous vos trajets en Essonne</h1>
+      <p>Avec Taxi Vite 91, bénéficiez d'un service de transport fiable, ponctuel et confortable. Spécialisés dans les transferts vers les gares, aéroports et le transport médical conventionné.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-p">Réservez votre course</a>
+        <a href="#services" class="btn-s">Découvrez nos services</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="services" class="section services">
+    <div class="container">
+      <div class="section-head">
+        <h2>Nos services de transport en Essonne</h2>
+        <p>Que ce soit pour un rendez-vous médical, un départ en vacances ou une course privée, Taxi Vite 91 vous accompagne avec professionnalisme.</p>
+      </div>
+      <div class="cards-grid">
+        <div class="card">
+          <span class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"/><path d="M12 18.25a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"/><path d="M12 14.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"/><path d="M12 11.25a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"/><path d="M12 7.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"/><path d="M12 4.25a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z"/><circle cx="12" cy="12" r="10"/></svg>
+          </span>
+          <h3>Transport Médical (VSL / Taxi Conventionné)</h3>
+          <p>Taxi Vite 91 est agréé par la Sécurité Sociale pour vos déplacements médicaux assis (consultations, hospitalisations, radiothérapies, etc.) en toute sérénité.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 17H6c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h11c1.1 0 2 .9 2 2v11c0 1.1-.9 2-2 2z"/><path d="M10 4v13M14 4v13M4 9h15M4 14h15"/></svg>
+          </span>
+          <h3>Transferts Gares & Aéroports</h3>
+          <p>Ne manquez jamais un vol ou un train. Nous assurons vos liaisons vers et depuis les principales gares et aéroports d'Île-de-France (Orly, Roissy CDG, Massy TGV...).</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v16H1V3z"/><path d="M15 15H1"/><path d="M15 11H1"/><path d="M15 7H1"/><circle cx="18.5" cy="12.5" r="2.5"/><path d="M21 16l-2.5-3.5L16 16"/></svg>
+          </span>
+          <h3>Courses Privées & Professionnelles</h3>
+          <p>Pour vos rendez-vous d'affaires, soirées, ou toute autre occasion, réservez un chauffeur privé. Confort, discrétion et ponctualité garantis.</p>
+        </div>
+        <div class="card">
+          <span class="card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </span>
+          <h3>Service 24h/24 et 7j/7</h3>
+          <p>Nos taxis sont disponibles à toute heure du jour et de la nuit, tous les jours de la semaine, pour répondre à vos besoins de déplacement urgents ou planifiés.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pourquoi-nous" class="section why-us">
+    <div class="container why-us-inner">
+      <div class="why-us-content">
+        <h2>Pourquoi choisir Taxi Vite 91 ?</h2>
+        <p>Nous nous engageons à offrir une expérience de transport irréprochable, basée sur la confiance, le confort et un service client de premier ordre.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item">
+          <span class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a8 8 0 0 0 8-8V7h-4V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v3H2v7a8 8 0 0 0 8 8Z"/><path d="M7 10h4"/></svg>
+          </span>
+          <div>
+            <h3>Ponctualité garantie</h3>
+            <p>Votre temps est précieux. Nous nous engageons à être toujours à l'heure, pour tous vos rendez-vous importants.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+          </span>
+          <div>
+            <h3>Chauffeurs professionnels</h3>
+            <p>Nos chauffeurs expérimentés connaissent parfaitement l'Essonne et sont formés pour une conduite sûre et agréable.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.6-.4-1-1-1h-1V5c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12H4c-.6 0-1 .4-1 1v3c0 .6.4 1 1 1h2c0 1.7 1.3 3 3 3s3-1.3 3-3h2c0 1.7 1.3 3 3 3s3-1.3 3-3h2c.6 0 1-.4 1-1v-3c0-.6-.4-1-1-1h-2"/><circle cx="9" cy="9" r="2"/><circle cx="15" cy="9" r="2"/></svg>
+          </span>
+          <div>
+            <h3>Véhicules confortables</h3>
+            <p>Voyagez dans des véhicules récents, climatisés et entretenus pour un maximum de confort et de sécurité.</p>
+          </div>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </span>
+          <div>
+            <h3>Disponibilité et Flexibilité</h3>
+            <p>Un besoin urgent ? Une réservation de dernière minute ? Nous nous adaptons à vos contraintes pour vous servir au mieux.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact">
+    <div class="container">
+      <div class="section-head">
+        <h2>Contactez Taxi Vite 91</h2>
+        <p>Pour toute question, demande de devis ou réservation, n'hésitez pas à nous contacter. Nous vous répondrons dans les plus brefs délais.</p>
+      </div>
+      <div class="contact-form-wrapper">
+        <form class="contact-form" action="#" method="POST">
+          <div class="form-row">
+            <div>
+              <label for="name">Nom complet</label>
+              <input type="text" id="name" name="name" required placeholder="Votre nom et prénom">
+            </div>
+            <div>
+              <label for="email">Adresse email</label>
+              <input type="email" id="email" name="email" required placeholder="nom.prenom@example.com">
+            </div>
+          </div>
+          <div class="form-row">
+            <div>
+              <label for="phone">Numéro de téléphone</label>
+              <input type="tel" id="phone" name="phone" placeholder="06 12 34 56 78">
+            </div>
+            <div>
+              <label for="subject">Sujet de votre message</label>
+              <input type="text" id="subject" name="subject" required placeholder="Ex: Demande de devis transfert aéroport">
+            </div>
+          </div>
+          <label for="message">Votre message</label>
+          <textarea id="message" name="message" rows="5" required placeholder="Décrivez votre besoin (type de course, date, heure, lieux de départ/arrivée, nombre de passagers...)"></textarea>
+          <button type="submit">Envoyer votre message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <a href="#accueil" class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" width="120" height="48">
+          <rect width="200" height="80" rx="12" fill="var(--logo-bg)"/>
+          <rect x="10" y="62" width="30" height="4" rx="2" fill="var(--logo-accent)"/>
+          <text x="100" y="48" font-family="Georgia, serif" font-size="18"
+            font-weight="700" font-style="normal"
+            letter-spacing="4" fill="var(--logo-accent)" text-anchor="middle"
+            dominant-baseline="middle">TAXI VITE 91</text>
+        </svg>
+      </a>
+      <div class="footer-links">
+        <a href="#accueil">Accueil</a>
+        <a href="#services">Services</a>
+        <a href="#pourquoi-nous">Pourquoi nous</a>
+        <a href="#contact">Contact</a>
+        <a href="#">Mentions légales</a>
+      </div>
+      <p>&copy; 2023 Taxi Vite 91. Tous droits réservés.</p>
+      <p>Service de taxi conventionné et privé en Essonne (91).</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.querySelector('.hamburger-menu');
+      const navOverlay = document.querySelector('.nav-overlay');
+      const navLinksOverlay = document.querySelectorAll('.nav-overlay .nav-links a, .nav-overlay .nav-tel');
+
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navOverlay.classList.toggle('active');
+        document.body.classList.toggle('no-scroll'); // Prevent scrolling when overlay is active
+      });
+
+      navLinksOverlay.forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          navOverlay.classList.remove('active');
+          document.body.classList.remove('no-scroll');
+        });
+      });
+
+      // Smooth scrolling for anchor links (if browser doesn't support scroll-behavior: smooth)
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+              e.preventDefault();
+              document.querySelector(this.getAttribute('href')).scrollIntoView({
+                  behavior: 'smooth'
+              });
+              // Close mobile menu if open
+              if (navOverlay.classList.contains('active')) {
+                  hamburger.classList.remove('active');
+                  navOverlay.classList.remove('active');
+                  document.body.classList.remove('no-scroll');
+              }
+          });
+      });
+
+      // Add no-scroll class dynamically for the small JS part to work.
+      // This is a common pattern for preventing body scroll when an overlay is active.
+      const styleSheet = document.createElement('style');
+      styleSheet.type = 'text/css';
+      styleSheet.innerText = '.no-scroll { overflow: hidden; }';
+      document.head.appendChild(styleSheet);
+    });
+  </script>
+
+</body>
+</html>
