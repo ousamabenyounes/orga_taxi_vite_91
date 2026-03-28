@@ -36,6 +36,10 @@
   }
   .top-bar{background:var(--nav);color:rgba(255,255,255,.7);text-align:center;padding:6px 40px;font-size:13px;font-weight:500;letter-spacing:.02em;border-bottom:1px solid rgba(255,255,255,.08);}
   .flag-tn{display:inline-flex;align-items:center;margin-left:12px;vertical-align:middle;}
+  .info-banner{background:#1a1a2e;color:#f0c040;text-align:center;padding:10px 48px 10px 16px;font-size:13px;font-weight:600;letter-spacing:.01em;border-bottom:2px solid #f0c040;position:relative;}
+  .info-banner a{color:#f0c040;text-decoration:underline;}
+  .banner-close{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:#f0c040;font-size:18px;cursor:pointer;line-height:1;padding:0 4px;}
+  .banner-close:hover{opacity:.7;}
   .logo{font-family:'Inter', 'Helvetica Neue', Arial, sans-serif;font-size:20px;font-weight:800;color:#fff;letter-spacing:-.03em;text-decoration:none;}
   .logo svg{display:block;} /* Ensure SVG is block level */
   .nav-links{display:none;flex-grow:1;justify-content:center;gap:28px;}
@@ -205,6 +209,10 @@
 <body>
 
   <div class="top-bar" id="datetime-bar"></div>
+  <div class="info-banner" id="recession-banner" role="alert">
+    ⚠️&nbsp; <strong>Info économique :</strong> La France est en récession — notre service reste disponible 7j/7, sans surcoût.
+    <button class="banner-close" onclick="document.getElementById('recession-banner').style.display='none'" aria-label="Fermer le bandeau">×</button>
+  </div>
   <nav>
     <a href="#accueil" class="logo">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" width="120" height="48">
